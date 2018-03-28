@@ -1,0 +1,7 @@
+/**/
+input[type="radio"],
+input[type="checkbox"] {
+    -ms-transform: scale(1);
+    transform: scale(1.5);
+    margin-right: 10px;
+}

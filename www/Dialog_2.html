@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#content {
+padding:10px;
+}
+
+#dialog_back {
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    background-color: #000;
+    opacity: 0.5;
+}
+#dialog_body {
+    position: absolute;
+    border-radius: 6px 6px 6px 6px;
+    left:75px;
+    top:150px;
+    width:200px;
+    height:150px;
+    background-color: #FFF;
+    box-shadow: 6px 6px 6px rgba(0,0,0,0.4);  /* CSS3 */
+    padding:50px;
+}
+</style>
+<script type="text/javascript">
+// ダイアログを表示
+function showDialog() {
+    var html = document.getElementById("content").innerHTML;
+
+    html = html + '<div id="dialog">'
+                +  '<div id="dialog_back" style="height:' // ①のdiv
+                +   getBrowserHeight() + 'px;"></div>'
+                +  '<div id="dialog_body">'    // ②のdiv
+                +  '<input type="button" onclick="closeDialog()" value="閉じる">'
+                + '</div>'
+                + '</div>';
+
+    document.getElementById("content").innerHTML = html;
+}
+// 画面の高さを取得
+function getBrowserHeight() {
+    if ( window.innerHeight ) {
+            return window.innerHeight;
+    }
+    else if ( document.documentElement &&
+            document.documentElement.clientHeight != 0 ) {
+            return document.documentElement.clientHeight;
+    }
+    else if ( document.body ) {
+            return document.body.clientHeight;
+    }
+    return 0;
+}
+// ダイアログを閉じる
+function closeDialog() {
+    var delNode = document.getElementById("dialog");
+    delNode.parentNode.removeChild(delNode);
+}
+</script>
+</head>
+<body>
+<div id="content">
+hogeeee
+</div>
+<input type="button" onclick="showDialog()" value="ダイアログ表示">
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+<!-- Openlayers 4 set -->
+  <script src="https://openlayers.org/en/v4.6.4/build/ol.js"></script>
+  <link rel="stylesheet" href="https://openlayers.org/en/v4.6.4/css/ol.css" type="text/css">
+<!-- jQuery -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <!--<script src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=true"type="text/javascript"></script>-->
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    ons.ready(function() {
+      console.log("Onsen UI is ready!");
+    });
+  </script>
+  
+<!-- MapCreate Javascript -->
+  <script src="mapCreate.js" type="text/javascript"></script>
+  
+</head>
+<body> <!-- onload="GetPosition()">-->
+  <ons-page>
+    <ons-tabbar position="auto">
+      <ons-tab label="地　図" page="tab1.html" active></ons-tab>
+      <ons-tab label="情報選択" page="tab2.html"></ons-tab>
+      <ons-tab label="そ の 他" page="tab3.html"></ons-tab>
+      <ons-tab label="履　歴" page="tab4.html"></ons-tab>
+    </ons-tabbar>
+  </ons-page>
+
+  <ons-template id="tab1.html">
+    <ons-page id="first-page">
+          <div id="opelateButton">
+            <input type="radio" name="OPRadio" value=1 checked="checked" /><label>新規 </label>
+            <input type="radio" name="OPRadio" value=2 /><label>移動 </label>
+            <input type="radio" name="OPRadio" value=3 /><label>削除 </label>
+            <input type="radio" name="OPRadio" value=4 /><label>変更</label>
+          </div>
+        <!--map display-->
+    <div id="action">    </div>
+    <div id="map" style="float:left; width:100%; height:100%;"></div>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="tab2.html">
+    <ons-page id="second-page">
+            <form name="myForm">
+          <!--ラジオボタン↓-->
+            <!--select name="myRadio" onChange ="SetPicture()">-->
+              <section style = "paddin: 20px">
+              <label>&emsp;--------------- 状　況　等 ---------------</label><br>
+            <form name="opelateForm">              
+              &emsp;<input type="button" ID="NewTruck" value="OK" onClick="OK()">
+              <input type="button" ID="NoTruck" value="Cancel" onClick="BK()"><br>
+            </form>
+          <div id="sampleButton">
+                <label class = "radio-button radio-button--material">
+                    &emsp;<img src="iCon/OneSoldier.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=1 checked="checked" /><label>兵　員</label>
+                    <img src="iCon/FewSoldier.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=2 /><label>兵数名</label><br>
+                    &emsp;<img src="iCon/SoldierMarching.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=3 /><label>多数兵</label>
+                    <img src="iCon/ArmorVehicle.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=4 /><label>戦闘車</label><br>
+                    &emsp;<img src="iCon/MoterBick.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=5 /><label>バイク</label>
+                    <img src="iCon/Track.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=6 /><label>トラｯｸ</label><br>
+                    &emsp;<img src="iCon/VehicleMarching.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=7 /><label>車多数</label>
+                    <img src="iCon/Tnk.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=8 /><label>戦　車</label><br>
+                    &emsp;<img src="iCon/CloudCar.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=9 /><label>渋　滞</label>
+                    <img src="iCon/FixWing.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=10 /><label>戦闘機</label><br>
+                    &emsp;<img src="iCon/Hel.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=11 /><label>へ　リ</label>
+                    <img src="iCon/SoldierFiring.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=12 /><label>発　砲</label><br>
+                    &emsp;<img src="iCon/FiringSound.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=13 /><label>発砲音</label>
+                    <img src="iCon/bomb.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=14 /><label>爆　発</label><br>
+                    &emsp;<img src="iCon/BombSound.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=15 /><label>爆発音</label>
+                    <img src="iCon/Smoke.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=16 /><label>　煙　</label><br>
+                    &emsp;<img src="iCon/Destroy.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=17 /><label>破　壊</label>
+                    <img src="iCon/Unknown.gif" align="absbottom">
+                    <input type="radio" name="myRadio" value=18 /><label>不　明</label><br>
+              <label>&emsp;--------------- 災　派　等 ---------------</label><br>
+                  &emsp;<img src="iCon/Bus.gif" align="absbottom">
+                  <input type="radio" name="myRadio" value=19 /><label>バ　ス</label>
+                  <img src="iCon/CivilCar.gif" align="absbottom">
+                  <input type="radio" name="myRadio" value=20 /><label>民間車</label><br>
+                  &emsp;<img src="iCon/Injured.gif" align="absbottom">
+                  <input type="radio" name="myRadio" value=23 /><label>負傷者</label>
+                  <img src="iCon/Cliff.gif" align="absbottom">
+                  <input type="radio" name="myRadio" value=24 /><label>崖崩れ</label><br>
+                  &emsp;<img src="iCon/Tsunami.gif" align="absbottom">
+                  <input type="radio" name="myRadio" value=25 /><label>津　波</label>
+                  <img src="iCon/Flood.gif" align="absbottom">
+                  <input type="radio" name="myRadio" value=26 /><label>洪　水</label><br>
+                  &emsp;<img src="iCon/Fire.gif" align="absbottom">
+                  <input type="radio" name="myRadio" value=27 /><label>火　災</label>
+                  <img src="iCon/EmarEvacu.gif" align="absbottom">
+                  <input type="radio" name="myRadio" value=28 /><label>緊避所</label><br>
+                  &emsp;<img src="iCon/EvacuSite.gif" align="absbottom">
+                  <input type="radio" name="myRadio" value=29 /><label>避難場</label>
+                  <img src="iCon/Emar&Evacu.gif" align="absbottom">
+                  <input type="radio" name="myRadio" value=30 /><label>緊＆避</label><br>
+                </label>                                  
+              </section>
+            </form>
+          </div>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="tab3.html">
+    <ons-page id="Third-page">
+          <div id="sampleButton">
+            <form name="myForm">
+          <!--ラジオボタン↓-->
+            <!--select name="myRadio" onChange ="SetPicture()">-->
+              <section style = "paddin: 20px">
+                <label class = "radio-button radio-button--material">
+                </label>                                  
+              </section>
+            </form>
+          </div>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="tab4.html">
+    <ons-page id="forth-page">
+      <p style="text-align: center;">
+        This is the forth page.
+      </p>
+    </ons-page>
+  </ons-template>
+
+  <script type="text/javascript">
+    GetPosition();
+  </script>
+</body>
+</html>
